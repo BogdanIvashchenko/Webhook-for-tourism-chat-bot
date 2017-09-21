@@ -39,101 +39,127 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "request":
-        return {}
-    result       = req.get("result")
-    parameters   = result.get("parameters")
-    accomodation = parameters.get("accomodation")
-    when         = parameters.get("when")
-    duration     = parameters.get("duration")
+    if req.get("result").get("action") == "request":
+        
+        result       = req.get("result")
+        parameters   = result.get("parameters")
+        accomodation = parameters.get("accomodation")
+        when         = parameters.get("when")
+        duration     = parameters.get("duration")
     
-    speech = ''
-    #speech = 'И сколько же нас поедет (не считая меня) ?'
+        speech = ''
+        #speech = 'И сколько же нас поедет (не считая меня) ?'
     
-    contextOut = []
-    enter = 0
+        contextOut = []
+        enter = 0
     
-    if not(len(accomodation)):
-        enter=1
-        contextOut = [{"name":"no_accomodation",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'И сколько же нас поедет (не считая меня) ?'
+        if not(len(accomodation)):
+            enter=1
+            contextOut = [{"name":"no_accomodation",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'И сколько же нас поедет (не считая меня) ?'
         
 
-    if not(len(when)):
-        enter=1
-        contextOut = [{"name":"no_when",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'А когда вы хотите отправиться?'
+        if not(len(when)):
+            enter=1
+            contextOut = [{"name":"no_when",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'А когда вы хотите отправиться?'
+
+
+        if not(len(duration)):
+            enter=1
+            contextOut = [{"name":"no_duration",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'И на долго вы от нас уезжаете?'
+
+
+        if not(len(when)) and not(len(accomodation)):
+            enter=1
+            contextOut = [{"name":"no_accomodation",
+                           "lifespan":5,
+                           "parameters":{}},
+                          {"name":"no_when",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'А много вас поедет? И когда?'
+
+
+        if not(len(duration)) and not(len(when)):
+            enter=1
+            contextOut = [{"name":"no_duration",
+                           "lifespan":5,
+                           "parameters":{}},
+                          {"name":"no_when",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'А когда вы собераетесь уезжать? И на сколько вы поедете?'
+
+
+        if not(len(accomodation)) and not(len(duration)):
+            enter=1
+            contextOut = [{"name":"no_accomodation",
+                           "lifespan":5,
+                           "parameters":{}},
+                          {"name":"no_duration",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'А какаой состав компании? И на сколько вы хотите отправиться?'
+
+        if not(len(accomodation)) and not(len(duration)) and not(len(when)):
+            enter=1
+            contextOut = [{"name":"no_accomodation",
+                           "lifespan":5,
+                           "parameters":{}},
+                          {"name":"no_duration",
+                           "lifespan":5,
+                           "parameters":{}},
+                          {"name":"no_when",
+                           "lifespan":5,
+                           "parameters":{}}]
+            speech = 'Мне было бы еще интересно как много вас поедет, на долго ли и когда?'
+        if enter==1:
+            return {
+                "speech": speech,
+                "displayText": speech,
+                #"data": {},
+                "contextOut": contextOut,
+                "source": "agent" #apiai-onlinestore-shipping",
+            }
+
+        #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
+
+        #print("Response:")
+        #print(speech)
+    if req.get("result").get("action") == "near_end":
         
-
-    if not(len(duration)):
-        enter=1
-        contextOut = [{"name":"no_duration",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'И на долго вы от нас уезжаете?'
+        result       = req.get("result")
+        contexts     = result.get("contexts")
+        parameters   = contexts.get("parameters")
+        accomodation = parameters.get("accomodation")
+        when         = parameters.get("when")
+        duration     = parameters.get("duration")
         
-
-    if not(len(when)) and not(len(accomodation)):
-        enter=1
-        contextOut = [{"name":"no_accomodation",
-                       "lifespan":5,
-                       "parameters":{}},
-                      {"name":"no_when",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'А много вас поедет? И когда?'
+        if len(accomodation) > 0 and len(when) > 0 and len(duration) > 0:
+            speech = 'Большое спасибо! Ваша заявка принята, с вами скоро свяжется наш менеджер.'
+            return {
+                "speech": speech,
+                "displayText": speech,
+                #"data": {},
+                #"contextOut": contextOut,
+                "source": "agent", #apiai-onlinestore-shipping",
+                "followupEvent": {
+                    "name": "the_end",
+                    "data": {
+                 #   "<parameter_name>":"<parameter_value>>"
+                    }
+                 }
+            }
+            
         
-
-    if not(len(duration)) and not(len(when)):
-        enter=1
-        contextOut = [{"name":"no_duration",
-                       "lifespan":5,
-                       "parameters":{}},
-                      {"name":"no_when",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'А когда вы собераетесь уезжать? И на сколько вы поедете?'
-        
-
-    if not(len(accomodation)) and not(len(duration)):
-        enter=1
-        contextOut = [{"name":"no_accomodation",
-                       "lifespan":5,
-                       "parameters":{}},
-                      {"name":"no_duration",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'А какаой состав компании? И на сколько вы хотите отправиться?'
-        
-    if not(len(accomodation)) and not(len(duration)) and not(len(when)):
-        enter=1
-        contextOut = [{"name":"no_accomodation",
-                       "lifespan":5,
-                       "parameters":{}},
-                      {"name":"no_duration",
-                       "lifespan":5,
-                       "parameters":{}},
-                      {"name":"no_when",
-                       "lifespan":5,
-                       "parameters":{}}]
-        speech = 'Мне было бы еще интересно как много вас поедет, на долго ли и когда?'
-    if enter==1:
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
-
-    #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
-
-    #print("Response:")
-    #print(speech)
 
 
 if __name__ == '__main__':
