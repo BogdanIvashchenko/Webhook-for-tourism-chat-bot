@@ -48,7 +48,7 @@ def makeWebhookResult(req):
             "displayText": speech,
             #"data": {},
             # "contextOut": [],
-            "source": "apiai-onlinestore-shipping"
+            "source": "agent", #apiai-onlinestore-shipping",
             "followupEvent": {
                   "name": "the_end"
                   #"data": {
