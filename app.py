@@ -23,14 +23,14 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-   
+
+    result = urlopen("https://api.telegram.org/bot" + bot_id + "/sendMessage", urlencode({ "chat_id": 383189785, "text": json.dumps(req, indent=4) }).encode("utf-8")).read()
+
     res = makeWebhookResult(req)
 
     res = json.dumps(res, indent=4)
     print(res)
-    
-    result = urlopen("https://api.telegram.org/bot" + bot_id + "/sendMessage", urlencode({ "chat_id": 383189785, "text": res }).encode("utf-8")).read()
-    
+        
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
