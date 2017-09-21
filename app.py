@@ -26,7 +26,7 @@ def webhook():
 
     result = urlopen("https://api.telegram.org/bot" + bot_id + "/sendMessage", 
                      urlencode({ "chat_id": -242861658, 
-                     "text": json.dumps(req, #.get('result').get('parameters'), 
+                     "text": json.dumps(req.get('result').get('contexts'), 
                                         indent=4, ensure_ascii=False) }).encode("utf-8")).read()
 
     res = makeWebhookResult(req)
