@@ -41,6 +41,7 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     accomodation = parameters.get("accomodation")
+    speech = ''
     if len(accomodation):
         return {
             "speech": speech,
