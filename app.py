@@ -43,7 +43,7 @@ def makeWebhookResult(req):
     accomodation = parameters.get("accomodation")
     speech = 'И сколько же нас поедет (не считая меня) ?'
     
-    if !(len(accomodation)):
+    if not (len(accomodation)):
         return {
             "speech": speech,
             "displayText": speech,
