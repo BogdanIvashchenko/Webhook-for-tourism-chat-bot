@@ -8,9 +8,14 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+from urllib.parse import urlencode
+from urllib.request import urlopen
+
+
 # Flask app should start in global layout
 app = Flask(__name__)
 
+bot_id = "438707605:AAEJceFWg-q8dGsTcZJrXCojCTL8gKN_VUI"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -18,11 +23,14 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-
+   
     res = makeWebhookResult(req)
 
     res = json.dumps(res, indent=4)
     print(res)
+    
+    result = urlopen("https://api.telegram.org/bot" + bot_id + "/sendMessage", urlencode({ "chat_id": 383189785, "text": res }).encode("utf-8")).read()
+    
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
