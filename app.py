@@ -138,7 +138,7 @@ def makeWebhookResult(req):
         
         result       = req.get("result")
         contexts     = result.get("contexts")
-        parameters   = contexts.get("parameters")
+        parameters   = contexts[0].get("parameters")
         accomodation = parameters.get("accomodation")
         when         = parameters.get("when")
         duration     = parameters.get("duration")
@@ -158,7 +158,7 @@ def makeWebhookResult(req):
                     }
                  }
             }
-            
+    return {}        
         
 
 
