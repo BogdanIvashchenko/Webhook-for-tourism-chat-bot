@@ -58,7 +58,7 @@ def makeWebhookResult(req):
         contextOut = [{"name":"no_accomodation",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например: сколько людей поедет.'
+        speech = 'И сколько же нас поедет (не считая меня) ?'
         
 
     if not(len(when)):
@@ -66,7 +66,7 @@ def makeWebhookResult(req):
         contextOut = [{"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например: когда вы хотите отправиться.'
+        speech = 'А когда вы хотите отправиться?'
         
 
     if not(len(duration)):
@@ -74,7 +74,7 @@ def makeWebhookResult(req):
         contextOut = [{"name":"no_duration",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например: сколько вы хотите провести ночей'
+        speech = 'И на долго вы от нас уезжаете?'
         
 
     if not(len(when)) and not(len(accomodation)):
@@ -85,7 +85,7 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например сколько людей поедет, или когда'
+        speech = 'А на долго? И когда?'
         
 
     if not(len(duration)) and not(len(when)):
@@ -96,7 +96,7 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например сколько людей поедет и на сколько'
+        speech = 'А какой состав компании? И на сколько вы поедете?'
         
 
     if not(len(accomodation)) and not(len(duration)):
@@ -107,7 +107,7 @@ def makeWebhookResult(req):
                       {"name":"no_duration",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например сколько людей поедет и на сколько'
+        speech = 'А какаой состав компании? И на сколько вы хотите отправиться?'
         
     if not(len(accomodation)) and not(len(duration)) and not(len(when)):
         enter=1
@@ -120,7 +120,7 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        #speech = 'Например сколько людей поедет и на сколько'
+        speech = 'Мне было бы еще интересно как много вас поедет, на долго ли и когда?'
     if enter==1:
         return {
             "speech": speech,
