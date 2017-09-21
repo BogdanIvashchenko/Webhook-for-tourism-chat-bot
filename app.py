@@ -85,7 +85,7 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        speech = 'А на долго? И когда?'
+        speech = 'А много вас поедет? И когда?'
         
 
     if not(len(duration)) and not(len(when)):
@@ -96,7 +96,7 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
-        speech = 'А какой состав компании? И на сколько вы поедете?'
+        speech = 'А когда вы собераетесь уезжать? И на сколько вы поедете?'
         
 
     if not(len(accomodation)) and not(len(duration)):
