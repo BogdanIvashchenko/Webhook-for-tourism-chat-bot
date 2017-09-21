@@ -53,13 +53,13 @@ def makeWebhookResult(req):
                             "parameters":{
                             #    "city":"Rome"
                             }}],
-            "source": "agent", #apiai-onlinestore-shipping",
-            "followupEvent": {
+            "source": "agent" #apiai-onlinestore-shipping",
+         '''"followupEvent": {
                   "name": "the_end",
                   "data": {
                   #   "<parameter_name>":"<parameter_value>>"
                   }
-            }
+            }'''
         }
     #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
 
