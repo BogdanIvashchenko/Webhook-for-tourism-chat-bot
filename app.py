@@ -41,13 +41,18 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     accomodation = parameters.get("accomodation")
-    speech = ''
-    if len(accomodation):
+    speech = 'И сколько же нас поедет (не считая меня) ?'
+    
+    if !(len(accomodation)):
         return {
             "speech": speech,
             "displayText": speech,
             #"data": {},
-            # "contextOut": [],
+            "contextOut": [{"name":"no_accomodation", 
+                            "lifespan":5, 
+                            "parameters":{
+                            #    "city":"Rome"
+                            }}],
             "source": "agent", #apiai-onlinestore-shipping",
             "followupEvent": {
                   "name": "the_end",
