@@ -48,18 +48,10 @@ def makeWebhookResult(req):
             "speech": speech,
             "displayText": speech,
             #"data": {},
-            "contextOut": [{"name":"no_accomodation", 
-                            "lifespan":5, 
-                            "parameters":{
-                            #    "city":"Rome"
-                            }}],
+            "contextOut": [{"name":"no_accomodation",
+                            "lifespan":5,
+                            "parameters":{}}],
             "source": "agent" #apiai-onlinestore-shipping",
-         '''"followupEvent": {
-                  "name": "the_end",
-                  "data": {
-                  #   "<parameter_name>":"<parameter_value>>"
-                  }
-            }'''
         }
     #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
 
