@@ -58,16 +58,43 @@ def makeWebhookResult(req):
         contextOut = [{"name":"no_accomodation",
                        "lifespan":5,
                        "parameters":{}}]
+        #speech = 'Например: сколько людей поедет.'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     if not(len(when)):
         enter=1
         contextOut = [{"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
+        #speech = 'Например: когда вы хотите отправиться.'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     if not(len(duration)):
         enter=1
         contextOut = [{"name":"no_duration",
                        "lifespan":5,
                        "parameters":{}}]
+        #speech = 'Например: сколько вы хотите провести ночей'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     if not(len(when)) and not(len(accomodation)):
         enter=1
         contextOut = [{"name":"no_accomodation",
@@ -76,6 +103,15 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
+        #speech = 'Например сколько людей поедет, или когда'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     if not(len(duration)) and not(len(when)):
         enter=1
         contextOut = [{"name":"no_duration",
@@ -84,6 +120,15 @@ def makeWebhookResult(req):
                       {"name":"no_when",
                        "lifespan":5,
                        "parameters":{}}]
+        #speech = 'Например сколько людей поедет и на сколько'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     if not(len(accomodation)) and not(len(duration)):
         enter=1
         contextOut = [{"name":"no_accomodation",
@@ -92,8 +137,7 @@ def makeWebhookResult(req):
                       {"name":"no_duration",
                        "lifespan":5,
                        "parameters":{}}]
-
-    if enter:
+        #speech = 'Например сколько людей поедет и на сколько'
         return {
             "speech": speech,
             "displayText": speech,
@@ -101,6 +145,25 @@ def makeWebhookResult(req):
             "contextOut": contextOut,
             "source": "agent" #apiai-onlinestore-shipping",
         }
+    if not(len(accomodation)) and not(len(duration)) and not(len(when)):
+        contextOut = [{"name":"no_accomodation",
+                       "lifespan":5,
+                       "parameters":{}},
+                      {"name":"no_duration",
+                       "lifespan":5,
+                       "parameters":{}},
+                      {"name":"no_when",
+                       "lifespan":5,
+                       "parameters":{}}]
+        #speech = 'Например сколько людей поедет и на сколько'
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            "contextOut": contextOut,
+            "source": "agent" #apiai-onlinestore-shipping",
+        }
+
     #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
 
     #print("Response:")
