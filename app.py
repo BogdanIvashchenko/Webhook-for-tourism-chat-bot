@@ -41,19 +41,64 @@ def webhook():
 def makeWebhookResult(req):
     if req.get("result").get("action") != "request":
         return {}
-    result = req.get("result")
-    parameters = result.get("parameters")
+    result       = req.get("result")
+    parameters   = result.get("parameters")
     accomodation = parameters.get("accomodation")
-    speech = 'И сколько же нас поедет (не считая меня) ?'
+    when         = parameters.get("when")
+    duration     = parameters.get("duration")
     
-    if not (len(accomodation)):
+    speech = ''
+    #speech = 'И сколько же нас поедет (не считая меня) ?'
+    
+    contextOut = []
+    enter = 0
+    
+    if not(len(accomodation)):
+        enter=1
+        contextOut = [{"name":"no_accomodation",
+                       "lifespan":5,
+                       "parameters":{}}]
+    if not(len(when)):
+        enter=1
+        contextOut = [{"name":"no_when",
+                       "lifespan":5,
+                       "parameters":{}}]
+    if not(len(duration)):
+        enter=1
+        contextOut = [{"name":"no_duration",
+                       "lifespan":5,
+                       "parameters":{}}]
+    if not(len(when)) and not(len(accomodation)):
+        enter=1
+        contextOut = [{"name":"no_accomodation",
+                       "lifespan":5,
+                       "parameters":{}},
+                      {"name":"no_when",
+                       "lifespan":5,
+                       "parameters":{}}]
+    if not(len(duration)) and not(len(when)):
+        enter=1
+        contextOut = [{"name":"no_duration",
+                       "lifespan":5,
+                       "parameters":{}},
+                      {"name":"no_when",
+                       "lifespan":5,
+                       "parameters":{}}]
+    if not(len(accomodation)) and not(len(duration)):
+        enter=1
+        contextOut = [{"name":"no_accomodation",
+                       "lifespan":5,
+                       "parameters":{}},
+                      {"name":"no_duration",
+                       "lifespan":5,
+                       "parameters":{}}]
+
+    if enter:
         return {
             "speech": speech,
             "displayText": speech,
             #"data": {},
-            "contextOut": [{"name":"no_accomodation",
-                            "lifespan":5,
-                            "parameters":{}}],
+            "contextOut": contextOut,
             "source": "agent" #apiai-onlinestore-shipping",
         }
     #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
