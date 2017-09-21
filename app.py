@@ -59,13 +59,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например: сколько людей поедет.'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
 
     if not(len(when)):
         enter=1
@@ -73,13 +67,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например: когда вы хотите отправиться.'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
 
     if not(len(duration)):
         enter=1
@@ -87,13 +75,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например: сколько вы хотите провести ночей'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
 
     if not(len(when)) and not(len(accomodation)):
         enter=1
@@ -104,13 +86,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например сколько людей поедет, или когда'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
 
     if not(len(duration)) and not(len(when)):
         enter=1
@@ -121,13 +97,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например сколько людей поедет и на сколько'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
 
     if not(len(accomodation)) and not(len(duration)):
         enter=1
@@ -138,14 +108,9 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например сколько людей поедет и на сколько'
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            "contextOut": contextOut,
-            "source": "agent" #apiai-onlinestore-shipping",
-        }
+        
     if not(len(accomodation)) and not(len(duration)) and not(len(when)):
+        enter=1
         contextOut = [{"name":"no_accomodation",
                        "lifespan":5,
                        "parameters":{}},
@@ -156,6 +121,7 @@ def makeWebhookResult(req):
                        "lifespan":5,
                        "parameters":{}}]
         #speech = 'Например сколько людей поедет и на сколько'
+    if enter==1:
         return {
             "speech": speech,
             "displayText": speech,
