@@ -16,6 +16,10 @@ from urllib.request import urlopen
 app = Flask(__name__)
 
 bot_id = "438707605:AAEJceFWg-q8dGsTcZJrXCojCTL8gKN_VUI"
+DEBUG = TRUE
+
+if DEBUG:
+    print("<!Debug is active!>")
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
