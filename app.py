@@ -15,7 +15,7 @@ from urllib.request import urlopen
 # Flask app should start in global layout
 app = Flask(__name__)
 
-bot_id = "438707605:AAEJceFWg-q8dGsTcZJrXCojCTL8gKN_VUI"
+bot_id = "&YOUR_TELEGRAM_BOT_TOKEN"
 DEBUG = True
 
 if DEBUG:
