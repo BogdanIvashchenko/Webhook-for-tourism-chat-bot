@@ -16,7 +16,7 @@ from urllib.request import urlopen
 app = Flask(__name__)
 
 bot_id = "438707605:AAEJceFWg-q8dGsTcZJrXCojCTL8gKN_VUI"
-DEBUG = TRUE
+DEBUG = True
 
 if DEBUG:
     print("<!Debug is active!>")
