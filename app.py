@@ -15,8 +15,9 @@ from urllib.request import urlopen
 # Flask app should start in global layout
 app = Flask(__name__)
 
-bot_id = "&YOUR_TELEGRAM_BOT_TOKEN"
-DEBUG = True
+bot_id  = "$YOUR_TELEGRAM_BOT_TOKEN"
+chat_id = "$CHAT_ID"
+DEBUG   = True
 
 if DEBUG:
     print("<!Debug is active!>")
@@ -29,9 +30,9 @@ def webhook():
     print(json.dumps(req, indent=4))
 
     result = urlopen("https://api.telegram.org/bot" + bot_id + "/sendMessage", 
-                     urlencode({ "chat_id": -242861658, 
-                     "text": json.dumps(req.get('result').get('parameters'), #.get('contexts'), 
-                                        indent=4, ensure_ascii=False) }).encode("utf-8")).read()
+                     urlencode({ "chat_id": chat_id, 
+                                 "text": json.dumps(req.get('result').get('parameters'), 
+                                                    indent=4, ensure_ascii=False) }).encode("utf-8")).read()
 
     res = makeWebhookResult(req)
 
@@ -54,7 +55,6 @@ def makeWebhookResult(req):
         duration     = parameters.get("duration")
     
         speech = ''
-        #speech = 'И сколько же нас поедет (не считая меня) ?'
     
         contextOut = []
         enter = 0
@@ -133,13 +133,9 @@ def makeWebhookResult(req):
                 "displayText": speech,
                 #"data": {},
                 "contextOut": contextOut,
-                "source": "agent" #apiai-onlinestore-shipping",
+                "source": "agent" 
             }
-
-        #speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
-
-        #print("Response:")
-        #print(speech)
+        
     if req.get("result").get("action") == "near_end":
         
         result       = req.get("result")
@@ -156,7 +152,7 @@ def makeWebhookResult(req):
                 "displayText": speech,
                 #"data": {},
                 #"contextOut": contextOut,
-                "source": "agent", #apiai-onlinestore-shipping",
+                "source": "agent", 
                 "followupEvent": {
                     "name": "the_end",
                     "data": {
